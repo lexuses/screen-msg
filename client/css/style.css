@@ -1,0 +1,39 @@
+html, body {
+    font-size: 50px;
+    text-transform: uppercase;
+}
+.bg-image {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+
+    background-size: cover;
+    filter: opacity(70%);
+
+    /* we set transition to 'all' properies - but you can use it just for background image either */
+    transition: linear all 0.5s;
+    /* if you don't use delay , background will disapear and transition will start from a white background - you have to set the transition-delay the same as transition time , so there won't be any problems */
+    -webkit-transition-delay: 0.5s;
+    /* Safari */
+    transition-delay: 0.5s;
+}
+.main {
+    height: 100%;
+    width: 100%;
+    display: table;
+    z-index: 1;
+    position: relative;
+}
+.wrapper {
+    display: table-cell;
+    height: 100%;
+    vertical-align: middle;
+    text-align: center;
+}
+.text {
+    width: 50%;
+    margin: 0 auto;
+}

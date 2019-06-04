@@ -1,0 +1,32 @@
+<html lang="ru">
+<head>
+  <title>Admin</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/socket.io.js"></script>
+  <script src="js/admin.js"></script>
+</head>
+<body style="background-color: #000; color: #fff;">
+  <div class="send-control">
+    <label>
+      <input type="checkbox" name="send" value="1" checked>
+      Send to screen
+    </label>
+    <button id="clear-text">Clear text field</button>
+    <button id="clear-picture">Clear picture</button>
+  </div>
+
+  <div class="main">
+    <div class="wrapper">
+      <div id="text" contenteditable="true"></div>
+    </div>
+  </div>
+
+  <div class="pictures">
+    <div class="picture-list"></div>
+  </div>
+
+</body>
+</html>
