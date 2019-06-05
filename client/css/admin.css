@@ -7,7 +7,7 @@
     text-transform: uppercase;
     text-align: center;
     margin: 0 auto;
-    white-space: pre;
+    word-break: break-all;
 }
 .main {
     width: 80%;
