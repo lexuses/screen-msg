@@ -2,6 +2,36 @@ function isActive() {
     return $('input[name=send]').is(':checked');
 }
 
+function addPictureToList(path) {
+    let img = document.createElement( "img" );
+    $(img).attr({src: 'media/' + path});
+
+    let mediaItem = document.createElement( "div" );
+    $(mediaItem).addClass('media-item');
+    $(mediaItem).append(img);
+
+    $('.media-list').append(mediaItem);
+}
+
+function getExtension(path) {
+    const re = /(?:\.([^.]+))?$/;
+
+    return re.exec(path)[1];
+}
+
+function addVideoToList(path) {
+    let video = document.createElement('video');
+    video.src = 'media/' + path;
+    video.autoplay = false;
+    video.muted = true;
+
+    let mediaItem = document.createElement( "div" );
+    $(mediaItem).addClass('media-item video');
+    $(mediaItem).append(video);
+
+    $('.media-list').append(mediaItem);
+}
+
 $(() => {
     const socket = io('http://localhost:3000');
     socket.on('connect', function() {
@@ -16,17 +46,17 @@ $(() => {
         console.log('Disconnected');
     });
 
-    socket.emit('pictures/all', {}, pictures => {
-        pictures.forEach((path) => {
-            let picture = document.createElement( "div" );
-            $(picture).addClass('picture');
+    socket.emit('media/all', {}, media => {
+        media.forEach((path) => {
+            switch (getExtension(path)) {
+                case 'jpg':
+                        addPictureToList(path);
+                    break;
+                case 'mp4':
+                        addVideoToList(path);
+                    break;
+            }
 
-            let img = document.createElement( "img" );
-            $(img).attr({src: 'pictures/' + path});
-
-            $(picture).append(img);
-
-            $('.picture-list').append(picture);
         })
     });
 
@@ -36,12 +66,33 @@ $(() => {
         }
     });
 
-    $('.picture-list').on('click', 'img', function (data) {
-        let src = $(this).attr('src');
-        $('.main').css({'background-image': 'url('+src+')'});
+    $('.media-list').on('click', '.media-item', function (data) {
+        let mediaNode = $(this).children()[0];
+        let src = $(mediaNode).attr('src');
+
+        let bgImage = $('.bg-image');
+        let bgVideo = $('.bg-video');
+
+        bgImage.hide();
+        bgVideo.hide();
+
+        switch (getExtension(src)) {
+            case 'jpg':
+                bgImage.css({'background-image': 'url('+src+')'});
+                bgImage.fadeIn();
+                break;
+            case 'mp4':
+                let video = bgVideo.find('video')[0];
+                video.src = src;
+                bgVideo.fadeIn();
+                break;
+        }
 
         if (isActive()) {
-            socket.emit('pictures/set', $(this).attr('src'));
+            socket.emit('media/set', {
+                src: $(mediaNode).attr('src'),
+                type: mediaNode.tagName,
+            });
         }
     });
 
@@ -52,11 +103,15 @@ $(() => {
         }
     });
 
-    $('#clear-picture').click(() => {
-        $('.main').css({'background-image': ''});
+    $('#clear-media').click(() => {
+        $('.bg-image').hide();
+        $('.bg-video').hide();
 
         if (isActive()) {
-            socket.emit('pictures/set', '');
+            socket.emit('media/set', {
+                src: '',
+                type: 'none'
+            });
         }
     });
 });

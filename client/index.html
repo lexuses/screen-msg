@@ -9,13 +9,19 @@
   <script src="js/admin.js"></script>
 </head>
 <body style="background-color: #000; color: #fff;">
+  <div class="bg-image" style="display: none"></div>
+  <div class="bg-video" style="display: none">
+    <div class="video-shadow"></div>
+    <video autoplay src="" muted></video>
+  </div>
+
   <div class="send-control">
     <label>
       <input type="checkbox" name="send" value="1" checked>
       Send to screen
     </label>
     <button id="clear-text">Clear text field</button>
-    <button id="clear-picture">Clear picture</button>
+    <button id="clear-media">Clear media</button>
   </div>
 
   <div class="main">
@@ -24,8 +30,8 @@
     </div>
   </div>
 
-  <div class="pictures">
-    <div class="picture-list"></div>
+  <div class="media-wrapper">
+    <div class="media-list"></div>
   </div>
 
 </body>

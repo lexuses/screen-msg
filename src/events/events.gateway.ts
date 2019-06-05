@@ -7,6 +7,11 @@ import {
 import {Client, Server, Socket} from 'socket.io';
 import {FinderService} from '../services/finder.service';
 
+interface MediaSetInterface {
+  src: string;
+  type: string;
+}
+
 @WebSocketGateway()
 export class EventsGateway {
   @WebSocketServer()
@@ -16,14 +21,14 @@ export class EventsGateway {
       private finder: FinderService,
   ) {}
 
-  @SubscribeMessage('pictures/all')
+  @SubscribeMessage('media/all')
   async findPictures(client: Client, data: any): Promise<string[]> {
-    return this.finder.getFiles('pictures');
+    return this.finder.getFiles('media');
   }
 
-  @SubscribeMessage('pictures/set')
-  async setPicture(socket: Socket, path: string): Promise<void> {
-    this.server.emit('screen/picture', path);
+  @SubscribeMessage('media/set')
+  async setPicture(socket: Socket, path: MediaSetInterface): Promise<void> {
+    this.server.emit('screen/media', path);
   }
 
   @SubscribeMessage('text/set')

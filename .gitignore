@@ -1,4 +1,4 @@
 .idea
 /node_modules
-!/client/pictures/.gitkeep
-/client/pictures/*
+!/client/media/.gitkeep
+/client/media/*
