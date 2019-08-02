@@ -33,7 +33,7 @@ function addVideoToList(path) {
 }
 
 $(() => {
-    const socket = io('http://localhost:3000');
+    const socket = io('http://127.0.0.1:3000');
     socket.on('connect', function() {
         console.log('Connected');
     });
