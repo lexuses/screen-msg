@@ -25,6 +25,10 @@
 .send-control:hover {
     cursor: pointer;
 }
+.send-control .opacity {
+    display: inline-block;
+    margin-left: 20px;
+}
 #clear-text, #clear-media {
     margin-left: 20px;
 }

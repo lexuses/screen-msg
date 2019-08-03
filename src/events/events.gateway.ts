@@ -35,4 +35,9 @@ export class EventsGateway {
   async setText(socket: Socket, text: string): Promise<void> {
     this.server.emit('screen/text', text);
   }
+
+  @SubscribeMessage('style/changed')
+  async styleChanged(socket: Socket, data: any): Promise<void> {
+    this.server.emit('screen/style', data);
+  }
 }

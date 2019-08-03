@@ -114,4 +114,14 @@ $(() => {
             });
         }
     });
+
+    $('input[type=range]').on('input', function () {
+        $(this).trigger('change');
+    });
+
+    $("[type=range]").change(function(){
+        socket.emit('style/changed', {
+            opacity: $(this).val(),
+        });
+    });
 });

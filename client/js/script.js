@@ -33,6 +33,14 @@ $(() => {
         $('.text').html(data);
     });
 
+    socket.on('screen/style', function(data) {
+        console.log(data);
+        let imageWrapper = $('.bg-image');
+        imageWrapper.css({
+            filter: `opacity(${data.opacity}%)`,
+        });
+    });
+
     socket.on('exception', function(data) {
         console.log('exception', data);
     });
