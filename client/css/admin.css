@@ -3,11 +3,11 @@
     background: transparent;
     border: 1px solid gray;
     color: #fff;
-    font-size: 50px;
+    font-size: 70px;
     text-transform: uppercase;
     text-align: center;
     margin: 0 auto;
-    word-break: break-all;
+    word-break: break-word;
 }
 .main {
     width: 85%;

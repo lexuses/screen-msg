@@ -119,9 +119,10 @@ $(() => {
         $(this).trigger('change');
     });
 
-    $("[type=range]").change(function(){
+    $("input[type=range]").change(function(){
         socket.emit('style/changed', {
-            opacity: $(this).val(),
+            opacity: $('#opacity').val(),
+            fontSize: $('#fontSize').val(),
         });
     });
 });

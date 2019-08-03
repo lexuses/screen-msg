@@ -34,11 +34,19 @@ $(() => {
     });
 
     socket.on('screen/style', function(data) {
-        console.log(data);
         let imageWrapper = $('.bg-image');
+        let videoShadow = $('.video-shadow');
+
         imageWrapper.css({
             filter: `opacity(${data.opacity}%)`,
         });
+        videoShadow.css({
+            'background-color': `rgba(0,0,0,${(100 - data.opacity)/100})`,
+        });
+
+        $('body').css({
+            'font-size': `${data.fontSize}px`,
+        })
     });
 
     socket.on('exception', function(data) {
